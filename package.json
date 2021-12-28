@@ -1,0 +1,21 @@
+{
+	"name": "buffercontext",
+	"version": "1.0.0",
+	"description": "A read/write context for ArrayBuffers",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Martijn Reuvers",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^17.0.2",
+		"typescript": "^4.5.4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MarByteBeep/BufferContext.git"
+	}
+}
