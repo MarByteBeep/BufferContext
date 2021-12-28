@@ -69,10 +69,26 @@ export class WriteContext extends BufferContext {
 		return size;
 	}
 
+	writeInt64(p_value: bigint): number {
+		const size = 8;
+		this.checkSize(size);
+		new DataView(this.buffer).setBigInt64(this.pos, p_value, this.littleEndian);
+		this.pos += size;
+		return size;
+	}
+
 	writeUInt32(p_value: number): number {
 		const size = 4;
 		this.checkSize(size);
 		new DataView(this.buffer).setUint32(this.pos, p_value, this.littleEndian);
+		this.pos += size;
+		return size;
+	}
+
+	writeInt32(p_value: number): number {
+		const size = 4;
+		this.checkSize(size);
+		new DataView(this.buffer).setInt32(this.pos, p_value, this.littleEndian);
 		this.pos += size;
 		return size;
 	}
@@ -85,10 +101,26 @@ export class WriteContext extends BufferContext {
 		return size;
 	}
 
+	writeInt16(p_value: number): number {
+		const size = 2;
+		this.checkSize(size);
+		new DataView(this.buffer).setInt16(this.pos, p_value, this.littleEndian);
+		this.pos += size;
+		return size;
+	}
+
 	writeUInt8(p_value: number): number {
 		const size = 1;
 		this.checkSize(size);
 		new DataView(this.buffer).setUint8(this.pos, p_value);
+		this.pos += size;
+		return size;
+	}
+
+	writeInt8(p_value: number): number {
+		const size = 1;
+		this.checkSize(size);
+		new DataView(this.buffer).setInt8(this.pos, p_value);
 		this.pos += size;
 		return size;
 	}

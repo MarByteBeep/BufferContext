@@ -43,11 +43,24 @@ export class ReadContext extends BufferContext {
 		return NaN;
 	}
 
-	readUInt32(): number {
+	readInt64(): bigint | number {
 		const offset = this.pos;
-		if (offset + 4 <= this.buffer.byteLength) {
+		if (offset + 8 <= this.buffer.byteLength) {
+			const value = new DataView(this.buffer).getBigInt64(this.pos, this.littleEndian);
+			this.pos += 8;
+			return value;
+		}
+
+		assert.fail(`Read outside buffer`);
+		return NaN;
+	}
+
+	readUInt32(): number {
+		const size = 4;
+		const offset = this.pos;
+		if (offset + size <= this.buffer.byteLength) {
 			const value = new DataView(this.buffer).getUint32(this.pos, this.littleEndian);
-			this.pos += 4;
+			this.pos += size;
 			return value;
 		}
 
@@ -81,11 +94,37 @@ export class ReadContext extends BufferContext {
 		return NaN;
 	}
 
+	readInt16(): number {
+		const size = 2;
+		const offset = this.pos;
+		if (offset + size <= this.buffer.byteLength) {
+			const value = new DataView(this.buffer).getInt16(this.pos, this.littleEndian);
+			this.pos += size;
+			return value;
+		}
+
+		assert.fail(`Read outside buffer`);
+		return NaN;
+	}
+
 	readUInt8(): number {
 		const size = 1;
 		const offset = this.pos;
 		if (offset + size <= this.buffer.byteLength) {
 			const value = new DataView(this.buffer).getUint8(this.pos);
+			this.pos += size;
+			return value;
+		}
+
+		assert.fail(`Read outside buffer`);
+		return NaN;
+	}
+
+	readInt8(): number {
+		const size = 1;
+		const offset = this.pos;
+		if (offset + size <= this.buffer.byteLength) {
+			const value = new DataView(this.buffer).getInt8(this.pos);
 			this.pos += size;
 			return value;
 		}
